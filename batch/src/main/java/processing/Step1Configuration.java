@@ -11,15 +11,13 @@ import org.springframework.jdbc.core.JdbcTemplate;
 @Configuration
 class Step1Configuration {
 
- @Bean
- Tasklet tasklet(JdbcTemplate jdbcTemplate) {
-
-  Log log = LogFactory.getLog(getClass());
-
-  return (contribution, chunkContext) -> { // <1>
-   log.info("starting the ETL job.");
-   jdbcTemplate.update("delete from PEOPLE");
-   return RepeatStatus.FINISHED;
-  };
- }
+    @Bean
+    Tasklet tasklet(JdbcTemplate jdbcTemplate) {
+        Log log = LogFactory.getLog(getClass());
+        return (contribution, chunkContext) -> { // <1>
+            log.info("starting the ETL job.");
+            jdbcTemplate.update("delete from PEOPLE");
+            return RepeatStatus.FINISHED;
+        };
+    }
 }
